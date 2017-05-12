@@ -1,0 +1,4 @@
+node_modules
+coverage
+dist
+src/__tests__/fixtures/findables/

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`finds something 1`] = `
+Array [
+  SourceLocation {
+    "end": Position {
+      "column": 7,
+      "line": 1,
+    },
+    "identifierName": "console",
+    "start": Position {
+      "column": 0,
+      "line": 1,
+    },
+  },
+]
+`;

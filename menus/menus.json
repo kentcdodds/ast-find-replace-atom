@@ -1,0 +1,18 @@
+{
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "AST Find and Replace",
+          "submenu": [
+            {
+              "label": "Find",
+              "command": "ast-find-and-replace:find"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

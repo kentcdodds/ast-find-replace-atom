@@ -1,0 +1,5 @@
+{
+  "atom-text-editor": {
+    "shift-alt-f": "ast-find-and-replace:find"
+  }
+}
