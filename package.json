@@ -24,6 +24,7 @@
     "babel-cli": "^6.23.0",
     "babel-jest": "^19.0.0",
     "babel-preset-env": "^1.2.0",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.23.0",
     "codecov": "^2.1.0",
@@ -38,21 +39,10 @@
     "nps-utils": "^1.1.2",
     "opt-cli": "^1.5.1",
     "prettier-eslint-cli": "^3.1.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "semantic-release": "^6.3.6",
     "validate-commit-msg": "^2.11.1"
-  },
-  "eslintConfig": {
-    "extends": [
-      "kentcdodds",
-      "kentcdodds/jest",
-      "kentcdodds/prettier"
-    ],
-    "rules": {
-      "func-style": "off"
-    },
-    "globals": {
-      "atom": false
-    }
   },
   "lint-staged": {
     "*.js": [
@@ -78,6 +68,9 @@
         "statements": 100
       }
     }
+  },
+  "deserializers": {
+    "ast-find-replace/FindInfoView": "deserializeActiveFindInfoView"
   },
   "config": {
     "commitizen": {

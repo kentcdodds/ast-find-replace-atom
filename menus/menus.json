@@ -8,7 +8,7 @@
           "submenu": [
             {
               "label": "Find",
-              "command": "ast-find-and-replace:find"
+              "command": "ast-find-replace:find"
             }
           ]
         }

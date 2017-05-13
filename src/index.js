@@ -1,31 +1,42 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-const {CompositeDisposable} = require('atom')
+// eslint-disable-next-line
+import { CompositeDisposable, Disposable } from 'atom';
+import FindInfoView from './find-info-view'
 
-function activate() {
-  const subscriptions = new CompositeDisposable()
-  subscriptions.add(
-    atom.commands.add('atom-workspace', 'ast-find-and-replace:find', () => {
-      const editor = atom.workspace.getActiveTextEditor()
-      if (!editor) {
-        return
-      }
-      const filePath = editor.getBuffer().file.path
-      require('./find')(filePath)
-      // const bufferRange = editor.getBuffer().getRange()
-      // const cursorPositionPriorToFormat = editor.getCursorScreenPosition()
-      // const textToTransform = editor.getTextInBufferRange(bufferRange)
-      // console.log(textToTransform)
-      // const transformed = executePrettier(editor, textToTransform)
+class ASTFindReplace {
+  subscriptions = null
 
-      // const isTextUnchanged = transformed === textToTransform
-      // if (!transformed || isTextUnchanged) {
-      //   return
-      // }
-
-      // editor.setTextInBufferRange(bufferRange, transformed)
-      // editor.setCursorScreenPosition(cursorPositionPriorToFormat)
-    }),
-  )
+  activate() {
+    this.subscriptions = new CompositeDisposable(
+      atom.workspace.addOpener(uri => {
+        if (uri === 'atom://ast-find-replace') {
+          return new FindInfoView()
+        }
+        return null
+      }),
+      new Disposable(() => {
+        atom.workspace.getPaneItems().forEach(item => {
+          if (item instanceof FindInfoView) {
+            item.destroy()
+          }
+        })
+      }),
+    )
+    this.subscriptions.add(
+      atom.commands.add('atom-workspace', 'ast-find-replace:find', () => {
+        const editor = atom.workspace.getActiveTextEditor()
+        if (!editor) {
+          return
+        }
+        atom.workspace.open('atom://ast-find-replace')
+      }),
+    )
+  }
+  deactivate() {
+    this.subscriptions.dispose()
+  }
+  deserializeActiveFindInfoView() {
+    return new FindInfoView()
+  }
 }
 
-export {activate}
+export default ASTFindReplace

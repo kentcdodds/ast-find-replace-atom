@@ -1,17 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`finds something 1`] = `
-Array [
-  SourceLocation {
-    "end": Position {
-      "column": 7,
-      "line": 1,
+Object {
+  "<projectRootDir>/src/__tests__/fixtures/findables/file-1.js": Array [
+    SourceLocation {
+      "end": Position {
+        "column": 7,
+        "line": 1,
+      },
+      "identifierName": "console",
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
     },
-    "identifierName": "console",
-    "start": Position {
-      "column": 0,
-      "line": 1,
-    },
-  },
-]
+  ],
+}
 `;

@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "kentcdodds",
+    "kentcdodds/react",
+    "kentcdodds/jest",
+    "kentcdodds/prettier"
+  ],
+  "rules": {
+    "func-style": "off"
+  },
+  "globals": {
+    "atom": false
+  }
+}

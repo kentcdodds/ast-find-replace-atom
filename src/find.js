@@ -38,26 +38,27 @@ function find(configFilePath) {
     return []
   }
   const visitors = config.worker(babel)
-  const matches = []
-  const wrappedVisitors = Object.keys(
-    visitors,
-  ).reduce((wrapped, visitorKey) => {
-    wrapped[visitorKey] = function wrappedVisitor(...args) {
-      const [astPath] = args
-      const nodeMatches = visitors[visitorKey].call(this, ...args)
-      if (nodeMatches) {
-        matches.push(astPath)
+  const matches = {}
+  const wrappedVisitors = filename => {
+    return Object.keys(visitors).reduce((wrapped, visitorKey) => {
+      wrapped[visitorKey] = function wrappedVisitor(...args) {
+        const [astPath] = args
+        const nodeMatches = visitors[visitorKey].call(this, ...args)
+        if (nodeMatches) {
+          matches[filename] = matches[filename] || []
+          matches[filename].push(astPath.node.loc)
+        }
       }
-    }
-    return wrapped
-  }, {})
+      return wrapped
+    }, {})
+  }
   matchingFiles.forEach(matchingFile => {
     babel.transformFileSync(matchingFile, {
       ...babelOptions,
-      plugins: [() => ({visitor: wrappedVisitors})],
+      plugins: [() => ({visitor: wrappedVisitors(matchingFile)})],
     })
   })
-  return matches.map(m => m.node.loc)
+  return matches
 }
 
 module.exports = find

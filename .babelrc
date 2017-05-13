@@ -5,6 +5,7 @@
         "node": 4.5
       }
     }],
-    "stage-2"
+    "stage-2",
+    "react"
   ]
 }
